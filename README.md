@@ -34,6 +34,7 @@ npx cap sync
 * [`requestPermissions()`](#requestpermissions)
 * [`addListener('measurement', ...)`](#addlistenermeasurement-)
 * [`removeAllListeners()`](#removealllisteners)
+* [`getPluginVersion()`](#getpluginversion)
 * [Interfaces](#interfaces)
 * [Type Aliases](#type-aliases)
 
@@ -159,6 +160,21 @@ removeAllListeners() => Promise<void>
 ```
 
 Remove all registered listeners for this plugin.
+
+**Since:** 1.0.0
+
+--------------------
+
+
+### getPluginVersion()
+
+```typescript
+getPluginVersion() => Promise<{ version: string; }>
+```
+
+Get the native Capacitor plugin version.
+
+**Returns:** <code>Promise&lt;{ version: string; }&gt;</code>
 
 **Since:** 1.0.0
 
