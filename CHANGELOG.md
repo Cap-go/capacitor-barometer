@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [7.2.1](https://github.com/Cap-go/capacitor-barometer/compare/7.2.0...7.2.1) (2025-10-27)
+
+
+### Bug Fixes
+
+* renovate capacitor dep ([c6e7fa8](https://github.com/Cap-go/capacitor-barometer/commit/c6e7fa89de9a75332cf5459d7e868bd68ea49afb))
+
 ## [7.2.0](https://github.com/Cap-go/capacitor-barometer/compare/7.1.0...7.2.0) (2025-10-27)
 
 
