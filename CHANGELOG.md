@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [7.2.0](https://github.com/Cap-go/capacitor-barometer/compare/7.1.0...7.2.0) (2025-10-27)
+
+
+### Features
+
+* add getPluginVersion ([e8c0f65](https://github.com/Cap-go/capacitor-barometer/commit/e8c0f6573a3ab5841e9e3b50aa5cae6a1f13931a))
+
+
+### Bug Fixes
+
+* script ([fc19d98](https://github.com/Cap-go/capacitor-barometer/commit/fc19d98371ee8537190d1fabc9db1e2bf0a7cbc5))
+
 ## 7.1.0 (2025-10-27)
 
 
