@@ -1,9 +1,13 @@
 import { WebPlugin } from '@capacitor/core';
 
-import type { CapacitorBarometerPlugin, GetMeasurementResult, IsAvailableResult, PermissionStatus } from './definitions';
+import type {
+  CapacitorBarometerPlugin,
+  GetMeasurementResult,
+  IsAvailableResult,
+  PermissionStatus,
+} from './definitions';
 
 export class CapacitorBarometerWeb extends WebPlugin implements CapacitorBarometerPlugin {
-
   async getMeasurement(): Promise<GetMeasurementResult> {
     throw this.unavailable('Barometer measurements are not available on the web.');
   }
@@ -30,5 +34,9 @@ export class CapacitorBarometerWeb extends WebPlugin implements CapacitorBaromet
 
   async removeAllListeners(): Promise<void> {
     await super.removeAllListeners();
+  }
+
+  async getPluginVersion(): Promise<{ version: string }> {
+    return { version: 'web' };
   }
 }

@@ -15,6 +15,7 @@ import com.getcapacitor.annotation.CapacitorPlugin;
 @CapacitorPlugin(name = "CapacitorBarometer")
 public class CapacitorBarometerPlugin extends Plugin implements SensorEventListener {
 
+    private final String PLUGIN_VERSION = "7.0.0";
     private static final String PERMISSION_GRANTED = "granted";
     private static final String PERMISSION_DENIED = "denied";
 
@@ -155,5 +156,16 @@ public class CapacitorBarometerPlugin extends Plugin implements SensorEventListe
         copy.put("relativeAltitude", lastMeasurement.optDouble("relativeAltitude", 0));
         copy.put("timestamp", lastMeasurement.optDouble("timestamp", 0));
         return copy;
+    }
+
+    @PluginMethod
+    public void getPluginVersion(final PluginCall call) {
+        try {
+            final JSObject ret = new JSObject();
+            ret.put("version", this.PLUGIN_VERSION);
+            call.resolve(ret);
+        } catch (final Exception e) {
+            call.reject("Could not get plugin version", e);
+        }
     }
 }

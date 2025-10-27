@@ -4,6 +4,7 @@ import Foundation
 
 @objc(CapacitorBarometerPlugin)
 public class CapacitorBarometerPlugin: CAPPlugin, CAPBridgedPlugin {
+    private let PLUGIN_VERSION: String = "7.0.0"
     public let identifier = "CapacitorBarometerPlugin"
     public let jsName = "CapacitorBarometer"
     public let pluginMethods: [CAPPluginMethod] = [
@@ -14,6 +15,7 @@ public class CapacitorBarometerPlugin: CAPPlugin, CAPBridgedPlugin {
         CAPPluginMethod(name: "checkPermissions", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "requestPermissions", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "removeAllListeners", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "getPluginVersion", returnType: CAPPluginReturnPromise)
     ]
 
     private let altimeter = CMAltimeter()
@@ -21,7 +23,7 @@ public class CapacitorBarometerPlugin: CAPPlugin, CAPBridgedPlugin {
     private var latestMeasurement: [String: Any] = [
         "pressure": 0.0,
         "relativeAltitude": 0.0,
-        "timestamp": Date().timeIntervalSince1970 * 1000,
+        "timestamp": Date().timeIntervalSince1970 * 1000
     ]
 
     @objc func getMeasurement(_ call: CAPPluginCall) {
@@ -65,7 +67,7 @@ public class CapacitorBarometerPlugin: CAPPlugin, CAPBridgedPlugin {
             let measurement: [String: Any] = [
                 "pressure": pressureHectoPascal,
                 "relativeAltitude": relativeAltitudeMeters,
-                "timestamp": timestamp,
+                "timestamp": timestamp
             ]
 
             self.latestMeasurement = measurement
@@ -117,5 +119,9 @@ public class CapacitorBarometerPlugin: CAPPlugin, CAPBridgedPlugin {
         }
 
         return "granted"
+    }
+
+    @objc func getPluginVersion(_ call: CAPPluginCall) {
+        call.resolve(["version": self.PLUGIN_VERSION])
     }
 }

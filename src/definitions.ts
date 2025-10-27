@@ -9,7 +9,7 @@ export interface Measurement {
   /**
    * The static air pressure in hectopascals (hPa).
    *
-  * @since 1.0.0
+   * @since 1.0.0
    */
   pressure: number;
 
@@ -154,4 +154,12 @@ export interface CapacitorBarometerPlugin {
    * @since 1.0.0
    */
   removeAllListeners(): Promise<void>;
+
+  /**
+   * Get the native Capacitor plugin version.
+   *
+   * @returns Promise that resolves with the plugin version
+   * @since 1.0.0
+   */
+  getPluginVersion(): Promise<{ version: string }>;
 }
