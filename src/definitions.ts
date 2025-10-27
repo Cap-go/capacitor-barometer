@@ -1,156 +1,157 @@
 import type { PluginListenerHandle } from '@capacitor/core';
 
 /**
- * Represents the current state and progress of a download task.
+ * Air pressure and relative altitude values sampled from the device barometer.
+ *
+ * @since 1.0.0
  */
-export interface DownloadTask {
-  /** Unique identifier for the download task */
-  id: string;
-  /** Download progress from 0 to 100 */
-  progress: number;
-  /** Current state of the download */
-  state: 'PENDING' | 'RUNNING' | 'PAUSED' | 'DONE' | 'ERROR';
+export interface Measurement {
+  /**
+   * The static air pressure in hectopascals (hPa).
+   *
+  * @since 1.0.0
+   */
+  pressure: number;
+
+  /**
+   * The change in altitude relative to the time updates started.
+   * Only available on iOS; Android will always return `0`.
+   *
+   * @since 1.0.0
+   */
+  relativeAltitude: number;
+
+  /**
+   * The timestamp of the measurement in milliseconds since the Unix epoch.
+   *
+   * @since 1.0.0
+   */
+  timestamp: number;
 }
 
 /**
- * Configuration options for starting a download.
+ * Result returned by {@link CapacitorBarometerPlugin.isAvailable}.
+ *
+ * @since 1.0.0
  */
-export interface DownloadOptions {
-  /** Unique identifier for this download task */
-  id: string;
-  /** URL of the file to download */
-  url: string;
-  /** Local file path where the download will be saved */
-  destination: string;
-  /** Optional HTTP headers to include in the request */
-  headers?: { [key: string]: string };
-  /** Network type requirement for download */
-  network?: 'cellular' | 'wifi-only';
-  /** Download priority level */
-  priority?: 'high' | 'normal' | 'low';
+export interface IsAvailableResult {
+  /**
+   * Indicates whether the device exposes a barometer sensor.
+   *
+   * @since 1.0.0
+   */
+  isAvailable: boolean;
 }
 
 /**
- * Capacitor plugin for downloading files with background support.
- * Provides resumable downloads with progress tracking.
+ * Permission information returned by {@link CapacitorBarometerPlugin.checkPermissions}
+ * and {@link CapacitorBarometerPlugin.requestPermissions}.
+ *
+ * @since 1.0.0
  */
-export interface CapacitorDownloaderPlugin {
+export interface PermissionStatus {
   /**
-   * Start a new download task.
+   * The permission state for accessing barometer measurements on the current platform.
    *
-   * @param options - Download configuration
-   * @returns Promise with initial download task status
-   * @example
-   * ```typescript
-   * const task = await Downloader.download({
-   *   id: 'my-download',
-   *   url: 'https://example.com/file.pdf',
-   *   destination: 'downloads/file.pdf'
-   * });
-   * ```
+   * @since 1.0.0
    */
-  download(options: DownloadOptions): Promise<DownloadTask>;
+  barometer: BarometerPermissionState;
+}
+
+/**
+ * Alias for the most recent pressure sample.
+ *
+ * @since 1.0.0
+ */
+export type GetMeasurementResult = Measurement;
+
+/**
+ * Permission state union including `limited` for platforms that can throttle sensor access.
+ *
+ * @since 1.0.0
+ */
+export type BarometerPermissionState = PermissionState | 'limited';
+
+/**
+ * Platform permission states supported by Capacitor.
+ *
+ * @since 1.0.0
+ */
+export type PermissionState = 'prompt' | 'prompt-with-rationale' | 'granted' | 'denied';
+
+/**
+ * Event payload emitted when {@link CapacitorBarometerPlugin.startMeasurementUpdates}
+ * is active.
+ *
+ * @since 1.0.0
+ */
+export type MeasurementEvent = Measurement;
+
+/**
+ * Capacitor plugin contract for working with the device barometer sensor.
+ *
+ * @since 1.0.0
+ */
+export interface CapacitorBarometerPlugin {
+  /**
+   * Get the most recent barometer reading captured by the native layer.
+   *
+   * @returns The latest pressure, relative altitude, and timestamp.
+   * @since 1.0.0
+   */
+  getMeasurement(): Promise<GetMeasurementResult>;
 
   /**
-   * Pause an active download.
-   * Download can be resumed later from the same position.
+   * Check if the current device includes a barometer sensor.
    *
-   * @param id - ID of the download task to pause
-   * @returns Promise that resolves when paused
+   * @returns Whether a barometer is available.
+   * @since 1.0.0
    */
-  pause(id: string): Promise<void>;
+  isAvailable(): Promise<IsAvailableResult>;
 
   /**
-   * Resume a paused download.
-   * Continues from where it was paused.
+   * Begin streaming barometer updates to the JavaScript layer.
    *
-   * @param id - ID of the download task to resume
-   * @returns Promise that resolves when resumed
+   * Call {@link addListener} with the `measurement` event to receive the updates.
+   *
+   * @since 1.0.0
    */
-  resume(id: string): Promise<void>;
+  startMeasurementUpdates(): Promise<void>;
 
   /**
-   * Stop and cancel a download permanently.
-   * Downloaded data will be deleted.
+   * Stop the continuous updates started via {@link startMeasurementUpdates}.
    *
-   * @param id - ID of the download task to stop
-   * @returns Promise that resolves when stopped
+   * @since 1.0.0
    */
-  stop(id: string): Promise<void>;
+  stopMeasurementUpdates(): Promise<void>;
 
   /**
-   * Check the current status of a download.
+   * Return the current permission state for accessing barometer data.
    *
-   * @param id - ID of the download task to check
-   * @returns Promise with current download task status
+   * @since 1.0.0
    */
-  checkStatus(id: string): Promise<DownloadTask>;
+  checkPermissions(): Promise<PermissionStatus>;
 
   /**
-   * Get information about a downloaded file.
+   * Request permission to access barometer data if required by the platform.
    *
-   * @param path - Local file path to inspect
-   * @returns Promise with file size and MIME type
+   * @since 1.0.0
    */
-  getFileInfo(path: string): Promise<{ size: number; type: string }>;
+  requestPermissions(): Promise<PermissionStatus>;
 
   /**
-   * Listen for download progress updates.
-   * Fired periodically as download progresses.
+   * Listen for pressure updates.
    *
-   * @param eventName - Must be 'downloadProgress'
-   * @param listenerFunc - Callback receiving progress updates
-   * @returns Promise with listener handle for removal
-   * @example
-   * ```typescript
-   * const listener = await Downloader.addListener('downloadProgress', (data) => {
-   *   console.log(`Download ${data.id}: ${data.progress}%`);
-   * });
-   * ```
+   * @param eventName Only the `measurement` event is supported.
+   * @param listenerFunc Callback invoked with each measurement.
+   * @since 1.0.0
    */
-  addListener(
-    eventName: 'downloadProgress',
-    listenerFunc: (progress: { id: string; progress: number }) => void,
-  ): Promise<PluginListenerHandle>;
+  addListener(eventName: 'measurement', listenerFunc: (event: MeasurementEvent) => void): Promise<PluginListenerHandle>;
 
   /**
-   * Listen for download completion.
-   * Fired when a download finishes successfully.
+   * Remove all registered listeners for this plugin.
    *
-   * @param eventName - Must be 'downloadCompleted'
-   * @param listenerFunc - Callback receiving completion notification
-   * @returns Promise with listener handle for removal
-   */
-  addListener(
-    eventName: 'downloadCompleted',
-    listenerFunc: (result: { id: string }) => void,
-  ): Promise<PluginListenerHandle>;
-
-  /**
-   * Listen for download failures.
-   * Fired when a download encounters an error.
-   *
-   * @param eventName - Must be 'downloadFailed'
-   * @param listenerFunc - Callback receiving error information
-   * @returns Promise with listener handle for removal
-   */
-  addListener(
-    eventName: 'downloadFailed',
-    listenerFunc: (error: { id: string; error: string }) => void,
-  ): Promise<PluginListenerHandle>;
-
-  /**
-   * Remove all event listeners.
-   * Cleanup method to prevent memory leaks.
-   *
-   * @returns Promise that resolves when all listeners removed
+   * @since 1.0.0
    */
   removeAllListeners(): Promise<void>;
-
-  /**
-   * Get the plugin version number.
-   *
-   * @returns Promise with version string
-   */
-  getPluginVersion(): Promise<{ version: string }>;
 }

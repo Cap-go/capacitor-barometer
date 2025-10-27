@@ -1,10 +1,10 @@
 import { registerPlugin } from '@capacitor/core';
 
-import type { CapacitorDownloaderPlugin } from './definitions';
+import type { CapacitorBarometerPlugin } from './definitions';
 
-const CapacitorDownloader = registerPlugin<CapacitorDownloaderPlugin>('CapacitorDownloader', {
-  web: () => import('./web').then((m) => new m.CapacitorDownloaderWeb()),
+const CapacitorBarometer = registerPlugin<CapacitorBarometerPlugin>('CapacitorBarometer', {
+  web: () => import('./web').then((m) => new m.CapacitorBarometerWeb()),
 });
 
 export * from './definitions';
-export { CapacitorDownloader };
+export { CapacitorBarometer };

@@ -1,34 +1,34 @@
 import { WebPlugin } from '@capacitor/core';
 
-import type { CapacitorDownloaderPlugin, DownloadTask, DownloadOptions } from './definitions';
+import type { CapacitorBarometerPlugin, GetMeasurementResult, IsAvailableResult, PermissionStatus } from './definitions';
 
-export class CapacitorDownloaderWeb extends WebPlugin implements CapacitorDownloaderPlugin {
-  async download(options: DownloadOptions): Promise<DownloadTask> {
-    console.log('DOWNLOAD', options);
-    throw new Error('Method not implemented.');
-  }
-  async pause(id: string): Promise<void> {
-    console.log('PAUSE', id);
-    throw new Error('Method not implemented.');
-  }
-  async resume(id: string): Promise<void> {
-    console.log('RESUME', id);
-    throw new Error('Method not implemented.');
-  }
-  async stop(id: string): Promise<void> {
-    console.log('STOP', id);
-    throw new Error('Method not implemented.');
-  }
-  async checkStatus(id: string): Promise<DownloadTask> {
-    console.log('CHECK STATUS', id);
-    throw new Error('Method not implemented.');
-  }
-  async getFileInfo(path: string): Promise<{ size: number; type: string }> {
-    console.log('GET FILE INFO', path);
-    throw new Error('Method not implemented.');
+export class CapacitorBarometerWeb extends WebPlugin implements CapacitorBarometerPlugin {
+
+  async getMeasurement(): Promise<GetMeasurementResult> {
+    throw this.unavailable('Barometer measurements are not available on the web.');
   }
 
-  async getPluginVersion(): Promise<{ version: string }> {
-    return { version: 'web' };
+  async isAvailable(): Promise<IsAvailableResult> {
+    return { isAvailable: false };
+  }
+
+  async startMeasurementUpdates(): Promise<void> {
+    throw this.unavailable('Barometer measurements are not available on the web.');
+  }
+
+  async stopMeasurementUpdates(): Promise<void> {
+    // No-op on the web implementation.
+  }
+
+  async checkPermissions(): Promise<PermissionStatus> {
+    return { barometer: 'denied' };
+  }
+
+  async requestPermissions(): Promise<PermissionStatus> {
+    return { barometer: 'denied' };
+  }
+
+  async removeAllListeners(): Promise<void> {
+    await super.removeAllListeners();
   }
 }

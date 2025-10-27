@@ -1,4 +1,4 @@
-package app.capgo.downloader;
+package app.capgo.barometer;
 
 import com.getcapacitor.BridgeActivity;
 
