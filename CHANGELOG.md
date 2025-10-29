@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [7.2.2](https://github.com/Cap-go/capacitor-barometer/compare/7.2.1...7.2.2) (2025-10-29)
+
+
+### Bug Fixes
+
+* CI/CD config ([dec17af](https://github.com/Cap-go/capacitor-barometer/commit/dec17af2052b8e6f13fdacfc5fded54232f95647))
+* update AI model in build workflow ([4549565](https://github.com/Cap-go/capacitor-barometer/commit/4549565b4872beb305ea29a2268e3bee859390dd))
+* update github action ([03e5c2f](https://github.com/Cap-go/capacitor-barometer/commit/03e5c2f6583a53259b06aa27bcfa3af2ac287467))
+
 ## [7.2.1](https://github.com/Cap-go/capacitor-barometer/compare/7.2.0...7.2.1) (2025-10-27)
 
 
