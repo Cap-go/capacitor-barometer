@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [7.2.3](https://github.com/Cap-go/capacitor-barometer/compare/7.2.2...7.2.3) (2025-10-30)
+
+
+### Bug Fixes
+
+* pluginVersion lint issue ([323f49d](https://github.com/Cap-go/capacitor-barometer/commit/323f49decc530f70a3631e53882eefbee534e8f3))
+* update package reference from capacitor-downloader to capacitor-barometer ([4d551c6](https://github.com/Cap-go/capacitor-barometer/commit/4d551c6efa5ea22c9826f959e68802fb031ac78d))
+
 ## [7.2.2](https://github.com/Cap-go/capacitor-barometer/compare/7.2.1...7.2.2) (2025-10-29)
 
 

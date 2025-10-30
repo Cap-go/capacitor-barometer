@@ -1,6 +1,6 @@
 {
   "name": "@capgo/capacitor-barometer",
-  "version": "7.2.2",
+  "version": "7.2.3",
   "description": "Access device barometer readings with Capacitor",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
