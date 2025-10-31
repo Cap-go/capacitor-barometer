@@ -15,7 +15,7 @@ import com.getcapacitor.annotation.CapacitorPlugin;
 @CapacitorPlugin(name = "CapacitorBarometer")
 public class CapacitorBarometerPlugin extends Plugin implements SensorEventListener {
 
-    private final String pluginVersion = "7.2.3";
+    private final String pluginVersion = "7.2.4";
     private static final String PERMISSION_GRANTED = "granted";
     private static final String PERMISSION_DENIED = "denied";
 
