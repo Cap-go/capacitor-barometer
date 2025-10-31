@@ -9,8 +9,6 @@
 
 Access barometer pressure measurements across iOS and Android.
 
-WIP: the plugin is not yet ready for production
-
 ## Documentation
 
 The most complete doc is available here: https://capgo.app/docs/plugins/barometer/
