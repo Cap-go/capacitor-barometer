@@ -101,8 +101,6 @@ public class CapacitorBarometerPlugin extends Plugin implements SensorEventListe
         super.removeAllListeners(call);
     }
 
-
-
     @Override
     public void handleOnDestroy() {
         if (sensorManager != null) {
