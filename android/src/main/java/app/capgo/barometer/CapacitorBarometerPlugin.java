@@ -102,22 +102,6 @@ public class CapacitorBarometerPlugin extends Plugin implements SensorEventListe
     }
 
     @Override
-    public void handleOnPause() {
-        if (sensorManager != null && updatesActive) {
-            sensorManager.unregisterListener(this);
-        }
-        super.handleOnPause();
-    }
-
-    @Override
-    public void handleOnResume() {
-        super.handleOnResume();
-        if (updatesActive && sensorManager != null && barometer != null) {
-            sensorManager.registerListener(this, barometer, SensorManager.SENSOR_DELAY_NORMAL);
-        }
-    }
-
-    @Override
     public void handleOnDestroy() {
         if (sensorManager != null) {
             sensorManager.unregisterListener(this);
