@@ -4,7 +4,7 @@ import Foundation
 
 @objc(CapacitorBarometerPlugin)
 public class CapacitorBarometerPlugin: CAPPlugin, CAPBridgedPlugin {
-    private let pluginVersion: String = "8.0.8"
+    private let pluginVersion: String = "8.0.9"
     public let identifier = "CapacitorBarometerPlugin"
     public let jsName = "CapacitorBarometer"
     public let pluginMethods: [CAPPluginMethod] = [
