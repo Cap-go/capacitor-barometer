@@ -1,0 +1,386 @@
+{
+  "api": {
+    "name": "CapacitorBarometerPlugin",
+    "slug": "capacitorbarometerplugin",
+    "docs": "Capacitor plugin contract for working with the device barometer sensor.",
+    "tags": [
+      {
+        "text": "1.0.0",
+        "name": "since"
+      }
+    ],
+    "methods": [
+      {
+        "name": "getMeasurement",
+        "signature": "() => Promise<GetMeasurementResult>",
+        "parameters": [],
+        "returns": "Promise<Measurement>",
+        "tags": [
+          {
+            "name": "returns",
+            "text": "The latest pressure, relative altitude, and timestamp."
+          },
+          {
+            "name": "since",
+            "text": "1.0.0"
+          }
+        ],
+        "docs": "Get the most recent barometer reading captured by the native layer.",
+        "complexTypes": [
+          "Measurement",
+          "GetMeasurementResult"
+        ],
+        "slug": "getmeasurement"
+      },
+      {
+        "name": "isAvailable",
+        "signature": "() => Promise<IsAvailableResult>",
+        "parameters": [],
+        "returns": "Promise<IsAvailableResult>",
+        "tags": [
+          {
+            "name": "returns",
+            "text": "Whether a barometer is available."
+          },
+          {
+            "name": "since",
+            "text": "1.0.0"
+          }
+        ],
+        "docs": "Check if the current device includes a barometer sensor.",
+        "complexTypes": [
+          "IsAvailableResult"
+        ],
+        "slug": "isavailable"
+      },
+      {
+        "name": "startMeasurementUpdates",
+        "signature": "() => Promise<void>",
+        "parameters": [],
+        "returns": "Promise<void>",
+        "tags": [
+          {
+            "name": "since",
+            "text": "1.0.0"
+          }
+        ],
+        "docs": "Begin streaming barometer updates to the JavaScript layer.\n\nCall {@link addListener} with the `measurement` event to receive the updates.",
+        "complexTypes": [],
+        "slug": "startmeasurementupdates"
+      },
+      {
+        "name": "stopMeasurementUpdates",
+        "signature": "() => Promise<void>",
+        "parameters": [],
+        "returns": "Promise<void>",
+        "tags": [
+          {
+            "name": "since",
+            "text": "1.0.0"
+          }
+        ],
+        "docs": "Stop the continuous updates started via {@link startMeasurementUpdates}.",
+        "complexTypes": [],
+        "slug": "stopmeasurementupdates"
+      },
+      {
+        "name": "checkPermissions",
+        "signature": "() => Promise<PermissionStatus>",
+        "parameters": [],
+        "returns": "Promise<PermissionStatus>",
+        "tags": [
+          {
+            "name": "since",
+            "text": "1.0.0"
+          }
+        ],
+        "docs": "Return the current permission state for accessing barometer data.",
+        "complexTypes": [
+          "PermissionStatus"
+        ],
+        "slug": "checkpermissions"
+      },
+      {
+        "name": "requestPermissions",
+        "signature": "() => Promise<PermissionStatus>",
+        "parameters": [],
+        "returns": "Promise<PermissionStatus>",
+        "tags": [
+          {
+            "name": "since",
+            "text": "1.0.0"
+          }
+        ],
+        "docs": "Request permission to access barometer data if required by the platform.",
+        "complexTypes": [
+          "PermissionStatus"
+        ],
+        "slug": "requestpermissions"
+      },
+      {
+        "name": "addListener",
+        "signature": "(eventName: 'measurement', listenerFunc: (event: MeasurementEvent) => void) => Promise<PluginListenerHandle>",
+        "parameters": [
+          {
+            "name": "eventName",
+            "docs": "Only the `measurement` event is supported.",
+            "type": "'measurement'"
+          },
+          {
+            "name": "listenerFunc",
+            "docs": "Callback invoked with each measurement.",
+            "type": "(event: Measurement) => void"
+          }
+        ],
+        "returns": "Promise<PluginListenerHandle>",
+        "tags": [
+          {
+            "name": "param",
+            "text": "eventName Only the `measurement` event is supported."
+          },
+          {
+            "name": "param",
+            "text": "listenerFunc Callback invoked with each measurement."
+          },
+          {
+            "name": "since",
+            "text": "1.0.0"
+          }
+        ],
+        "docs": "Listen for pressure updates.",
+        "complexTypes": [
+          "PluginListenerHandle",
+          "MeasurementEvent"
+        ],
+        "slug": "addlistenermeasurement-"
+      },
+      {
+        "name": "removeAllListeners",
+        "signature": "() => Promise<void>",
+        "parameters": [],
+        "returns": "Promise<void>",
+        "tags": [
+          {
+            "name": "since",
+            "text": "1.0.0"
+          }
+        ],
+        "docs": "Remove all registered listeners for this plugin.",
+        "complexTypes": [],
+        "slug": "removealllisteners"
+      },
+      {
+        "name": "getPluginVersion",
+        "signature": "() => Promise<{ version: string; }>",
+        "parameters": [],
+        "returns": "Promise<{ version: string; }>",
+        "tags": [
+          {
+            "name": "returns",
+            "text": "Promise that resolves with the plugin version"
+          },
+          {
+            "name": "since",
+            "text": "1.0.0"
+          }
+        ],
+        "docs": "Get the native Capacitor plugin version.",
+        "complexTypes": [],
+        "slug": "getpluginversion"
+      }
+    ],
+    "properties": []
+  },
+  "interfaces": [
+    {
+      "name": "Measurement",
+      "slug": "measurement",
+      "docs": "Air pressure and relative altitude values sampled from the device barometer.",
+      "tags": [
+        {
+          "text": "1.0.0",
+          "name": "since"
+        }
+      ],
+      "methods": [],
+      "properties": [
+        {
+          "name": "pressure",
+          "tags": [
+            {
+              "text": "1.0.0",
+              "name": "since"
+            }
+          ],
+          "docs": "The static air pressure in hectopascals (hPa).",
+          "complexTypes": [],
+          "type": "number"
+        },
+        {
+          "name": "relativeAltitude",
+          "tags": [
+            {
+              "text": "1.0.0",
+              "name": "since"
+            }
+          ],
+          "docs": "The change in altitude relative to the time updates started.\nOnly available on iOS; Android will always return `0`.",
+          "complexTypes": [],
+          "type": "number"
+        },
+        {
+          "name": "timestamp",
+          "tags": [
+            {
+              "text": "1.0.0",
+              "name": "since"
+            }
+          ],
+          "docs": "The timestamp of the measurement in milliseconds since the Unix epoch.",
+          "complexTypes": [],
+          "type": "number"
+        }
+      ]
+    },
+    {
+      "name": "IsAvailableResult",
+      "slug": "isavailableresult",
+      "docs": "Result returned by {@link CapacitorBarometerPlugin.isAvailable}.",
+      "tags": [
+        {
+          "text": "1.0.0",
+          "name": "since"
+        }
+      ],
+      "methods": [],
+      "properties": [
+        {
+          "name": "isAvailable",
+          "tags": [
+            {
+              "text": "1.0.0",
+              "name": "since"
+            }
+          ],
+          "docs": "Indicates whether the device exposes a barometer sensor.",
+          "complexTypes": [],
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "name": "PermissionStatus",
+      "slug": "permissionstatus",
+      "docs": "Permission information returned by {@link CapacitorBarometerPlugin.checkPermissions}\nand {@link CapacitorBarometerPlugin.requestPermissions}.",
+      "tags": [
+        {
+          "text": "1.0.0",
+          "name": "since"
+        }
+      ],
+      "methods": [],
+      "properties": [
+        {
+          "name": "barometer",
+          "tags": [
+            {
+              "text": "1.0.0",
+              "name": "since"
+            }
+          ],
+          "docs": "The permission state for accessing barometer measurements on the current platform.",
+          "complexTypes": [
+            "BarometerPermissionState"
+          ],
+          "type": "BarometerPermissionState"
+        }
+      ]
+    },
+    {
+      "name": "PluginListenerHandle",
+      "slug": "pluginlistenerhandle",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "remove",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "() => Promise<void>"
+        }
+      ]
+    }
+  ],
+  "enums": [],
+  "typeAliases": [
+    {
+      "name": "GetMeasurementResult",
+      "slug": "getmeasurementresult",
+      "docs": "Alias for the most recent pressure sample.",
+      "types": [
+        {
+          "text": "Measurement",
+          "complexTypes": [
+            "Measurement"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "BarometerPermissionState",
+      "slug": "barometerpermissionstate",
+      "docs": "Permission state union including `limited` for platforms that can throttle sensor access.",
+      "types": [
+        {
+          "text": "PermissionState",
+          "complexTypes": [
+            "PermissionState"
+          ]
+        },
+        {
+          "text": "'limited'",
+          "complexTypes": []
+        }
+      ]
+    },
+    {
+      "name": "PermissionState",
+      "slug": "permissionstate",
+      "docs": "",
+      "types": [
+        {
+          "text": "'prompt'",
+          "complexTypes": []
+        },
+        {
+          "text": "'prompt-with-rationale'",
+          "complexTypes": []
+        },
+        {
+          "text": "'granted'",
+          "complexTypes": []
+        },
+        {
+          "text": "'denied'",
+          "complexTypes": []
+        }
+      ]
+    },
+    {
+      "name": "MeasurementEvent",
+      "slug": "measurementevent",
+      "docs": "Event payload emitted when {@link CapacitorBarometerPlugin.startMeasurementUpdates}\nis active.",
+      "types": [
+        {
+          "text": "Measurement",
+          "complexTypes": [
+            "Measurement"
+          ]
+        }
+      ]
+    }
+  ],
+  "pluginConfigs": []
+}
