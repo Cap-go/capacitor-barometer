@@ -5,6 +5,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.SystemClock;
 import androidx.annotation.Nullable;
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
@@ -38,7 +39,7 @@ public class CapacitorBarometerPlugin extends Plugin implements SensorEventListe
         }
         lastMeasurement.put("pressure", 0);
         lastMeasurement.put("relativeAltitude", 0);
-        lastMeasurement.put("timestamp", (double) System.currentTimeMillis());
+        lastMeasurement.put("timestamp", 0.0);
     }
 
     @PluginMethod
@@ -116,7 +117,13 @@ public class CapacitorBarometerPlugin extends Plugin implements SensorEventListe
         }
 
         double pressure = event.values[0]; // Already reported in hPa
-        double timestamp = System.currentTimeMillis();
+        // SensorEvent.timestamp is nanoseconds since boot (elapsedRealtimeNanos
+        // clock). Convert to Unix epoch by computing the sensor sample's age
+        // relative to the current boot clock and subtracting from wall clock.
+        // This preserves the sensor's true measurement time instead of using
+        // System.currentTimeMillis() which reflects callback delivery time.
+        long sensorAgeNanos = SystemClock.elapsedRealtimeNanos() - event.timestamp;
+        double timestamp = System.currentTimeMillis() - sensorAgeNanos / 1_000_000.0;
 
         lastMeasurement.put("pressure", pressure);
         lastMeasurement.put("relativeAltitude", 0);

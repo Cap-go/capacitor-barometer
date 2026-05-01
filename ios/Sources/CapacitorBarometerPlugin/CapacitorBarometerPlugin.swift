@@ -23,7 +23,7 @@ public class CapacitorBarometerPlugin: CAPPlugin, CAPBridgedPlugin {
     private var latestMeasurement: [String: Any] = [
         "pressure": 0.0,
         "relativeAltitude": 0.0,
-        "timestamp": Date().timeIntervalSince1970 * 1000
+        "timestamp": 0.0
     ]
 
     @objc func getMeasurement(_ call: CAPPluginCall) {
@@ -62,7 +62,14 @@ public class CapacitorBarometerPlugin: CAPPlugin, CAPBridgedPlugin {
 
             let pressureHectoPascal = data.pressure.doubleValue * 10.0
             let relativeAltitudeMeters = data.relativeAltitude.doubleValue
-            let timestamp = Date().timeIntervalSince1970 * 1000
+            // CMAltimeterData.timestamp is seconds since device boot (system uptime).
+            // Convert to Unix epoch by computing the age of the sample relative to
+            // the current uptime and subtracting that from the current wall clock.
+            // This preserves the sensor's true measurement time instead of using
+            // Date() which reflects when the callback fires — a critical difference
+            // when iOS delivers batched updates after backgrounding.
+            let sensorAge = ProcessInfo.processInfo.systemUptime - data.timestamp
+            let timestamp = (Date().timeIntervalSince1970 - sensorAge) * 1000
 
             let measurement: [String: Any] = [
                 "pressure": pressureHectoPascal,
