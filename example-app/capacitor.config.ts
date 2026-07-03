@@ -4,7 +4,7 @@ import pkg from './package.json';
 
 const config: CapacitorConfig = {
   appId: 'app.capgo.barometer',
-  appName: 'Barometer Example',
+  appName: '@capgo/capacitor-barometer',
   webDir: 'dist',
   plugins: {
     SplashScreen: {
