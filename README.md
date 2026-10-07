@@ -1,5 +1,7 @@
 # @capgo/capacitor-barometer
 
+Read air pressure from the device barometer on iOS and Android, as the latest sample or as a live stream of updates. Weather, outdoor and fitness apps get real sensor data with a few lines of code.
+
 <a href="https://capgo.app/?ref=plugin_barometer"><img src="https://capgo.app/readme-banner.svg?repo=Cap-go/capacitor-barometer" alt="Capgo - Instant updates for Capacitor" /></a>
 
 <div align="center">
@@ -9,10 +11,8 @@
   <p><a href="https://capgo.app/consulting/?ref=plugin_barometer">Missing a feature? We'll build the plugin for you 💪</a></p>
 </div>
 
-Read air pressure from the device barometer on iOS and Android, as the latest sample or as a live stream of updates. Weather, outdoor and fitness apps get real sensor data with a few lines of code.
-
 <p align="center">
-  <img src="./assets/github-social-preview.png" alt="Capgo barometer plugin for Capacitor: npm i @capgo/capacitor-barometer" width="300" />
+  <img src="https://raw.githubusercontent.com/Cap-go/capacitor-barometer/main/assets/github-social-preview.png" alt="Capgo barometer plugin for Capacitor: npm i @capgo/capacitor-barometer" width="300" />
 </p>
 
 ## Key features
