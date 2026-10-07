@@ -1,13 +1,28 @@
 # @capgo/capacitor-barometer
-<a href="https://capgo.app/"><img src="https://capgo.app/readme-banner.svg?repo=Cap-go/capacitor-barometer" alt="Capgo - Instant updates for Capacitor" /></a>
+
+<a href="https://capgo.app/?ref=plugin_barometer"><img src="https://capgo.app/readme-banner.svg?repo=Cap-go/capacitor-barometer" alt="Capgo - Instant updates for Capacitor" /></a>
 
 <div align="center">
-  <h2><a href="https://capgo.app/?ref=plugin_barometer"> ➡️ Get Instant updates for your App with Capgo</a></h2>
-  <h2><a href="https://capgo.app/consulting/?ref=plugin_barometer"> Missing a feature? We’ll build the plugin for you 💪</a></h2>
+  <p><b>Capgo</b>: open-source live updates for Ionic and Capacitor apps. Ship OTA fixes and features instantly, without waiting for app store review.</p>
+  <h2><a href="https://capgo.app/register/?ref=plugin_barometer">➡️ Get started for free</a></h2>
+  <p>14-day unlimited free trial. No credit card required</p>
+  <p><a href="https://capgo.app/consulting/?ref=plugin_barometer">Missing a feature? We'll build the plugin for you 💪</a></p>
 </div>
 
+Read air pressure from the device barometer on iOS and Android, as the latest sample or as a live stream of updates. Weather, outdoor and fitness apps get real sensor data with a few lines of code.
 
-Access barometer pressure measurements across iOS and Android.
+<p align="center">
+  <img src="./assets/github-social-preview.png" alt="Capgo barometer plugin for Capacitor: npm i @capgo/capacitor-barometer" width="300" />
+</p>
+
+## Key features
+
+- **Pressure readings**: `getMeasurement()` returns the latest air pressure sample in hectopascals (hPa) with a timestamp.
+- **Live updates**: `startMeasurementUpdates()` streams readings to the `measurement` listener until you call `stopMeasurementUpdates()`.
+- **Relative altitude on iOS**: each reading includes the altitude change since updates started (Android reports `0`).
+- **Availability check**: `isAvailable()` tells you whether the device has a barometer before you show pressure UI.
+- **Permission status**: `checkPermissions()` and `requestPermissions()` report access, using Core Motion authorization on iOS 17 and later.
+- **Platforms**: iOS and Android. iOS uses Core Motion `CMAltimeter`, Android uses `Sensor.TYPE_PRESSURE`. On web, `isAvailable()` returns `false`.
 
 ## Documentation
 
