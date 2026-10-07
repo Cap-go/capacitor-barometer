@@ -17,7 +17,7 @@ Read air pressure from the device barometer on iOS and Android, as the latest sa
 
 ## Key features
 
-- **Pressure readings**: `getMeasurement()` returns the latest air pressure sample in hectopascals (hPa) with a timestamp.
+- **Pressure readings**: `getMeasurement()` returns the latest air pressure sample in hectopascals (hPa) with a timestamp. Start updates first, since it returns `0` until the first sensor event.
 - **Live updates**: `startMeasurementUpdates()` streams readings to the `measurement` listener until you call `stopMeasurementUpdates()`.
 - **Relative altitude on iOS**: each reading includes the altitude change since updates started (Android reports `0`).
 - **Availability check**: `isAvailable()` tells you whether the device has a barometer before you show pressure UI.
